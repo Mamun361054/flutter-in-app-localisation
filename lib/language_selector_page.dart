@@ -8,14 +8,6 @@ class LanguageSelectorPage extends StatefulWidget {
 }
 
 class _LanguageSelectorPageState extends State<LanguageSelectorPage> {
-  static final List<String> languagesList = application.supportedLanguages;
-  static final List<String> languageCodesList =
-      application.supportedLanguagesCodes;
-
-  final Map<dynamic, dynamic> languagesMap = {
-    languagesList[0]: languageCodesList[0],
-    languagesList[1]: languageCodesList[1],
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +15,7 @@ class _LanguageSelectorPageState extends State<LanguageSelectorPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text(
-            AppTranslations.of(context).text("title_select_language"),
+            AppTranslations.of(context).text("title_select_language")
           ),
         ),
         body: _buildLanguagesList(),
@@ -48,7 +40,7 @@ class _LanguageSelectorPageState extends State<LanguageSelectorPage> {
       },
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
             language,
             style: TextStyle(

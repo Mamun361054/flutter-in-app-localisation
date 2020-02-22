@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:in_app_localisation/app_translations.dart';
 import 'package:in_app_localisation/application.dart';

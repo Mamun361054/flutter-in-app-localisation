@@ -4,6 +4,8 @@ import 'package:in_app_localisation/application.dart';
 import 'package:in_app_localisation/language_selector_icon_button.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'app_translations.dart';
+
 void main() {
   runApp(LocalisedApp());
 }
@@ -17,12 +19,14 @@ class LocalisedApp extends StatefulWidget {
 
 class LocalisedAppState extends State<LocalisedApp> {
   AppTranslationsDelegate _newLocaleDelegate;
+  AppTranslations appTranslations;
 
   @override
   void initState() {
     super.initState();
     _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
     application.onLocaleChanged = onLocaleChange;
+    application.onLocaleChanged(Locale(languagesMap['Malay']));
   }
 
   @override
@@ -35,7 +39,16 @@ class LocalisedAppState extends State<LocalisedApp> {
           ],
           title: Text("Localised App"),
         ),
-        body: Container(),
+        body: Container(
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Text(appTranslations != null ? appTranslations.text("tab_home"):"NA"),
+                Text(appTranslations != null ? appTranslations.text("tab_profile"):"NA"),
+              ],
+            ),
+          ),
+        ),
       ),
       localizationsDelegates: [
         _newLocaleDelegate,
@@ -47,6 +60,7 @@ class LocalisedAppState extends State<LocalisedApp> {
       supportedLocales: [
         const Locale("en", ""),
         const Locale("es", ""),
+        const Locale("ms", ""),
       ],
     );
   }
@@ -54,6 +68,10 @@ class LocalisedAppState extends State<LocalisedApp> {
   void onLocaleChange(Locale locale) {
     setState(() {
       _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
+      _newLocaleDelegate.load(locale).then((val){
+        appTranslations = val;
+        print(appTranslations.text("title_select_language"));
+      });
     });
   }
 }

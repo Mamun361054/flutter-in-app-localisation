@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 class Application {
-
   static final Application _application = Application._internal();
 
   factory Application() {
@@ -13,11 +12,13 @@ class Application {
   final List<String> supportedLanguages = [
     "English",
     "Spanish",
+    "Malay",
   ];
 
   final List<String> supportedLanguagesCodes = [
     "en",
     "es",
+    "ms",
   ];
 
   //returns the list of supported Locales
@@ -31,3 +32,12 @@ class Application {
 Application application = Application();
 
 typedef void LocaleChangeCallback(Locale locale);
+
+final List<String> languagesList = application.supportedLanguages;
+final List<String> languageCodesList = application.supportedLanguagesCodes;
+
+final Map<dynamic, dynamic> languagesMap = {
+  languagesList[0]: languageCodesList[0],
+  languagesList[1]: languageCodesList[1],
+  languagesList[2]: languageCodesList[2],
+};
